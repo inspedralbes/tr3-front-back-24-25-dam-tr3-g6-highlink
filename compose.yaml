@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  high-link-front:
+    # Build the Docker image using the Dockerfile in the current directory
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    # Expose the Nuxt.js development port
+    ports:
+      - "3000:3000"
+    # Mount the current directory to the container for hot reloading
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+      - /app/.nuxt
+    # Set the working directory in the container
+    working_dir: /app
+    # Set the environment variable for development mode
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true  # Force file watching through polling
+      - HOST=0.0.0.0             # Bind Nuxt server to all interfaces
+    # Automatically restart the container if it crashes
+    restart: unless-stopped
+    networks:
+        - high-link-network
+
+  high-link-back:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./back:/app
+      - /app/node_modules
+    working_dir: /app
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+    networks:
+      - high-link-network
+
+  # high-link-mysql:
+  #   image: mysql:5.7
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=root
+  #     - MYSQL_DATABASE=highlink
+  #     - MYSQL_USER=user
+  #     - MYSQL_PASSWORD=password
+  #   volumes:
+  #     - high-link-mysql-data:/var/lib/mysql
+  #   restart: unless-stopped
+  #   networks:
+  #     - high-link-network
+
+  # high-link-adminer:
+  #   image: adminer
+  #   ports:
+  #     - "8080:8080"
+  #   restart: unless-stopped
+  #   networks:
+  #     - high-link-network
+
+  # high-link-mongodb:
+  #   image: mongo
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - high-link-mongo-data:/data/db
+  #   restart: unless-stopped
+  #   networks:
+  #     - high-link-network
+
+  # high-link-mongo-express:
+  #   image: mongo-express
+  #   ports:
+  #     - "8081:8081"
+  #   environment:
+  #     - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+  #     - ME_CONFIG_MONGODB_ADMINPASSWORD=pass
+  #     - ME_CONFIG_MONGODB_SERVER=high-link-mongodb
+  #   restart: unless-stopped
+  #   networks:
+  #     - high-link-network
+
+volumes:
+  high-link-mysql-data:
+  high-link-mongo-data:
+  
+networks:
+  high-link-network:
+    driver: bridge
