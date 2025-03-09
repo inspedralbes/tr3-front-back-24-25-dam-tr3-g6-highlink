@@ -26,21 +26,21 @@ services:
     networks:
         - high-link-network
 
-  high-link-back:
-    build:
-      context: ./back
-      dockerfile: Dockerfile
-    ports:
-      - "4000:4000"
-    volumes:
-      - ./back:/app
-      - /app/node_modules
-    working_dir: /app
-    environment:
-      - NODE_ENV=development
-    restart: unless-stopped
-    networks:
-      - high-link-network
+  # high-link-back:
+  #   build:
+  #     context: ./back
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "4000:4000"
+  #   volumes:
+  #     - ./back:/app
+  #     - /app/node_modules
+  #   working_dir: /app
+  #   environment:
+  #     - NODE_ENV=development
+  #   restart: unless-stopped
+  #   networks:
+  #     - high-link-network
 
   # high-link-mysql:
   #   image: mysql:5.7
