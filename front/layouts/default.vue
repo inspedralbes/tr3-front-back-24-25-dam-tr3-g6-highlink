@@ -1,16 +1,9 @@
 <template>
-    <div id="app" class="flex flex-col min-h-screen bg-gray-800 text-white">
-        <!-- <nav class="bg-blue-700 p-4">
-            <ul class="list-none p-0 flex justify-center">
-                <li class="mx-4"><router-link to="/" class="text-white no-underline">Home</router-link></li>
-                <li class="mx-4"><router-link to="/aboutUs" class="text-white no-underline">About</router-link></li>
-                <li class="mx-4"><router-link to="/contact" class="text-white no-underline">Contact</router-link></li>
-            </ul>
-        </nav> -->
-        <nav class="bg-gray-900 py-4 absolute t-0 w-full">
+    <div id="app" class="flex flex-col min-h-screen text-white">
+        <nav class="bg-slate-800 py-4 absolute t-0 w-full">
             <div class="container mx-auto flex justify-between items-center">
                 <!-- Nombre del cine a la izquierda -->
-                <router-link to="/" class="text-white text-2xl font-semibold">High Link</router-link>
+                <router-link to="/" class="text-white text-2xl font-semibold ml-2">High Link</router-link>
                 <!-- Botón para toggle de menú en dispositivos móviles -->
                 <button @click="toggleMenu" class="block lg:hidden text-white focus:outline-none">
                     <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
@@ -33,16 +26,16 @@
             </div>
         </nav>
         <main class="flex-1">
-            <router-view></router-view>
+            <NuxtPage />
         </main>
-        <footer class="bg-gray-900 text-white text-center p-4">
+        <footer class="bg-slate-800 text-white text-center p-4">
             <p>&copy; 2025 High Link</p>
         </footer>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const showMenu = ref(false);
 
@@ -53,11 +46,13 @@ const toggleMenu = () => {
 const menuClasses = computed(() => ({
     'hidden': !showMenu.value,
     'lg:flex': true,
-    'flex-row': true,
+    'flex-col': true, // Cambiar a columna en dispositivos móviles
+    'lg:flex-row': true, // Cambiar a fila en dispositivos grandes
     'items-center': true,
     'w-full': true,
     'lg:w-auto': true,
-    'text-center': true
+    'text-right': true, // Alinear a la derecha
+    'lg:text-left': true // Alinear a la izquierda en dispositivos grandes
 }));
 </script>
 
@@ -71,7 +66,22 @@ nav a {
 }
 
 nav a:hover {
-    color: #ffd700;
-    /* Cambiar color al pasar el cursor */
+    animation: backgroundChange 3s linear infinite;
+    background: linear-gradient(90deg, #ffd700, #ff0000, #ffd700);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes backgroundChange {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 </style>
