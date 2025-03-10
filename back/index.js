@@ -1,19 +1,25 @@
-import express from 'express';
-import cors from 'cors';
+import express from "express";
+import bodyParser from "body-parser";
+import { sequelize } from "./models/index.js";
+import userRoutes from "./routes/userRoutes.js";
+import gameRoutes from "./routes/gameRoutes.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
-const port = 4000;
+const PORT = process.env.PORT || 4000;
 
-// Enable CORS
-app.use(cors());
+app.use(bodyParser.json());
 
+app.use("/api/users", userRoutes);
+app.use("/api/games", gameRoutes);
 
-// Basic route
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+app.use("/uploads", express.static("uploads"));
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+sequelize.sync().then(() => {
+  console.log("Database synced");
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 });
