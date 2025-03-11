@@ -4,8 +4,15 @@ import bcrypt from "bcrypt";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+import { generateToken, verifyTokenMiddleware } from "../token.js";
 
 const router = express.Router();
+
+export async function hashPassword(contrasenya) {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(contrasenya, salt);
+  return hashedPassword
+}
 
 const uploadDir = "uploads";
 
@@ -51,8 +58,20 @@ router.post("/:id/upload", upload.single("image"), async (req, res) => {
     }
   });
 
+// Login
+router.post("/login", async (req, res) => {
+  const user = await User.findOne({ where: { email: req.body.email } });
+  if (user) {
+    const validPassword = await bcrypt.compare(req.body.password, user.password);
+    if (validPassword) {
+      const token = generateToken(user.email);
+      res.json({user, token});
+    } else res.status(400).json({ error: "Invalid password" });
+  } else res.status(400).json({ error: "User not found" });
+});
+
 // Get All Users
-router.get("/", async (req, res) => {
+router.get("/", verifyTokenMiddleware, async (req, res) => {
   const users = await User.findAll();
   res.json(users);
 });
