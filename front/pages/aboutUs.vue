@@ -2,7 +2,7 @@
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl w-full">
             <!-- Page Title -->
-            <h1 class="text-4xl sm:text-5xl font-bold text-center mt-9 pt-9 mb-8">
+            <h1 class="text-5xl sm:text-6xl font-bold text-center tracking-widest mb-8">
                 About Us
             </h1>
 

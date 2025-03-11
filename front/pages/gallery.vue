@@ -1,23 +1,44 @@
 <template>
-    <div class="min-h-screen text-white flex flex-col items-center justify-center">
-        <div class="pt-5 mt-9 text-center">
-            <h1 class="mt-9 text-6xl font-bold tracking-widest" style="text-shadow: 5px 3px 4px rgba(255, 255, 255, 0.9);">Art Gallery</h1>
-            <p class="mt-2 text-lg mb-8">Discover the amazing art of our game</p>
-        </div>
-        <div class="flex flex-col items-center justify-center align-center">
-            <!-- <iframe class="lg:min-w-[610px] lg:min-h-[365px] md:min-w-[410px] md:min-h-[250px] mx-7 my-4" src="https://www.youtube-nocookie.com/embed/GSCIoTOiPsc?si=cxAvB6M3amRQvpW-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6 mb-7 p-5 border bg-[#0f172a] rounded-lg">
-                <div class="flex justify-center">
-                    <img class="object-cover" src="public/assets/artGallery/red-player.png" alt="">
+    <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Page Title -->
+            <div class="text-center">
+                <h1 class="text-4xl sm:text-5xl font-bold mb-4">Art Gallery</h1>
+                <p class="text-lg text-gray-300">Discover the amazing art of our game</p>
+            </div>
+
+            <!-- Art Gallery Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+                <!-- Artwork 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105">
+                    <img class="w-full h-64 object-cover" src="/public/assets/artGallery/red-player.png" alt="Red Player Art">
+                    <div class="p-4 bg-blue-100">
+                        <p class="text-sm text-blue-800">Red Player Character</p>
+                    </div>
                 </div>
-                <div class="flex justify-center">
-                    <img class="object-cover" src="public/assets/artGallery/yellow-player.png" alt="">
+
+                <!-- Artwork 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105">
+                    <img class="w-full h-64 object-cover" src="/public/assets/artGallery/yellow-player.png" alt="Yellow Player Art">
+                    <div class="p-4 bg-purple-100">
+                        <p class="text-sm text-purple-800">Yellow Player Character</p>
+                    </div>
                 </div>
-                <div class="flex justify-center">
-                    <img class="w-[100px] h-[100px] object-cover" src="public/assets/artGallery/crab-extra.png" alt="">
+
+                <!-- Artwork 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105">
+                    <img class="w-full h-64 object-cover" src="/public/assets/artGallery/crab-extra.png" alt="Crab Extra Art">
+                    <div class="p-4 bg-red-100">
+                        <p class="text-sm text-red-800">Crab Enemy</p>
+                    </div>
                 </div>
-                <div class="flex justify-center">
-                    <img class="w-[350px] h-[200px] object-cover" src="public/assets/artGallery/background-1.png" alt="">
+
+                <!-- Artwork 4 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105">
+                    <img class="w-full h-64 object-cover" src="/public/assets/artGallery/background-1.png" alt="Game Background Art">
+                    <div class="p-4 bg-green-100">
+                        <p class="text-sm text-green-800">Game Background</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -27,3 +48,7 @@
 <script setup>
 // Add any additional logic here
 </script>
+
+<style scoped>
+/* Add custom styles if needed */
+</style>
