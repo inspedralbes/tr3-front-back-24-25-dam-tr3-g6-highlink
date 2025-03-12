@@ -21,8 +21,8 @@ services:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true  # Force file watching through polling
       - HOST=0.0.0.0             # Bind Nuxt server to all interfaces
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     # Automatically restart the container if it crashes
     restart: unless-stopped
     networks:
