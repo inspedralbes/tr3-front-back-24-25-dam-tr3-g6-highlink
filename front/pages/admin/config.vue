@@ -1,0 +1,1 @@
+<template><h1>configuracion de los parametros del juego</h1></template>

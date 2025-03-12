@@ -42,10 +42,6 @@
         </nav>
 
         <!-- Main Content -->
-        <!-- <main class="container mx-auto my-auto">
-            <NuxtPage />
-        </main> -->
-
         <main class="flex-1 flex items-center justify-center">
             <NuxtPage />
         </main>

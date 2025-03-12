@@ -11,7 +11,7 @@
                 <!-- Arnau -->
                 <div class="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105">
                     <div class="p-6">
-                        <h2 class="text-2xl font-bold text-white mb-4">Arnau Fernandez</h2>
+                        <h2 class="text-2xl font-bold text-white mb-4">Arnau Fernández</h2>
                         <p class="text-gray-300 leading-relaxed">
                             Arnau is a skilled Unity developer and backend specialist. He focuses on building immersive game experiences using Unity and manages the backend infrastructure with Sequelize. His expertise ensures seamless integration between the game and its backend systems.
                         </p>
