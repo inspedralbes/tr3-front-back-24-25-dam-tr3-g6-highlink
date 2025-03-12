@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   high-link-front:
     # Build the Docker image using the Dockerfile in the current directory
@@ -43,6 +41,22 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    networks:
+      - high-link-network
+  
+  python-service:
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - high-link-mongodb
+    env_file:
+      - .env
+    volumes:
+      - ./python:/app
+      - ./python/images:/app/images
     networks:
       - high-link-network
 
