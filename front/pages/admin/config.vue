@@ -1,1 +1,32 @@
-<template><h1>configuracion de los parametros del juego</h1></template>
+<template>
+    <div class="animate-fade-in">
+        <h2 class="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+            Config Game
+        </h2>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+            <p class="text-gray-300">Configure game settings here.</p>
+            <!-- Add your configuration form or controls here -->
+        </div>
+    </div>
+</template>
+
+<script setup>
+</script>
+
+<style scoped>
+/* Fade-in animation */
+.animate-fade-in {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
