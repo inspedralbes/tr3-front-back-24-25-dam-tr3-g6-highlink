@@ -4,7 +4,8 @@
         <nav class="bg-gradient-to-r from-slate-800 to-slate-900 py-4 fixed top-0 w-full z-50 shadow-lg">
             <div class="container mx-auto flex justify-between items-center px-4">
                 <!-- Brand Name -->
-                <router-link to="/" class="text-white text-2xl font-bold hover:text-gray-300 transition-colors duration-300">
+                <router-link to="/"
+                    class="text-white text-2xl font-bold hover:text-gray-300 transition-colors duration-300">
                     High Link
                 </router-link>
 
@@ -20,16 +21,20 @@
 
                 <!-- Navigation Links -->
                 <div :class="menuClasses">
-                    <router-link to="/howToPlay" class="text-white hover:text-gray-300 transition-colors duration-300 block mt-4 lg:inline-block lg:mt-0 mr-6">
+                    <router-link to="/howToPlay"
+                        class="text-white hover:text-gray-300 transition-colors duration-300 block mt-4 lg:inline-block lg:mt-0 mr-6">
                         How To Play
                     </router-link>
-                    <router-link to="/aboutUs" class="text-white hover:text-gray-300 transition-colors duration-300 block mt-4 lg:inline-block lg:mt-0 mr-6">
+                    <router-link to="/aboutUs"
+                        class="text-white hover:text-gray-300 transition-colors duration-300 block mt-4 lg:inline-block lg:mt-0 mr-6">
                         About Us
                     </router-link>
-                    <router-link to="/contact" class="text-white hover:text-gray-300 transition-colors duration-300 block mt-4 lg:inline-block lg:mt-0 mr-6">
+                    <router-link to="/contact"
+                        class="text-white hover:text-gray-300 transition-colors duration-300 block mt-4 lg:inline-block lg:mt-0 mr-6">
                         Contact
                     </router-link>
-                    <router-link to="/gallery" class="text-white hover:text-gray-300 transition-colors duration-300 block mt-4 lg:inline-block lg:mt-0">
+                    <router-link to="/gallery"
+                        class="text-white hover:text-gray-300 transition-colors duration-300 block mt-4 lg:inline-block lg:mt-0">
                         Gallery
                     </router-link>
                 </div>
@@ -37,12 +42,17 @@
         </nav>
 
         <!-- Main Content -->
-        <main class="flex-1 pt-20 pb-16">
+        <!-- <main class="container mx-auto my-auto">
+            <NuxtPage />
+        </main> -->
+
+        <main class="flex-1 flex items-center justify-center">
             <NuxtPage />
         </main>
 
         <!-- Footer -->
-        <footer class="bg-gradient-to-r from-slate-800 to-slate-900 text-white text-center p-4 fixed bottom-0 w-full shadow-lg">
+        <footer
+            class="bg-gradient-to-r from-slate-800 to-slate-900 text-white text-center p-4 fixed bottom-0 w-full shadow-lg">
             <p>&copy; 2025 High Link</p>
         </footer>
     </div>
@@ -89,9 +99,11 @@ nav a:hover {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
