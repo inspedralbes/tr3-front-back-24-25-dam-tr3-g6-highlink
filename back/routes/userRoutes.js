@@ -96,8 +96,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-
-
 // Delete User
 router.delete("/:id", async (req, res) => {
   const user = await User.findByPk(req.params.id);
