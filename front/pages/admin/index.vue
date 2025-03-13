@@ -1,3 +1,3 @@
 <template>
-    <h1>Registro y inicio de session admin</h1>
+    <h1>main page admin</h1>
 </template>
