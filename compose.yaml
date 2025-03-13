@@ -44,7 +44,7 @@ services:
     networks:
       - high-link-network
   
-  python-service:
+  high-link-python:
     build:
       context: ./python
       dockerfile: Dockerfile

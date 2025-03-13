@@ -43,13 +43,26 @@ router.post("/", async (req, res) => {
 
 // Get Stats by ID
 router.get("/:id", async (req, res) => {
+
+  console.log(`${process.env.NODE_PYTHON_URI}/run-script/${req.params.id}`);
   
-  fetch(`${process.env.NODE_PYTHON_URI}/run-script/${req.params.id}`, {
-    method: 'POST',
-  })
-    .then(response => response.json())
-    .then(data => res.json(data))
-    .catch(error => res.status(500).json({ error: error.message }));
+  try {
+    console.log(`${process.env.NODE_PYTHON_URI}/run-script/${req.params.id}`);
+    
+    const response = await fetch(`${process.env.NODE_PYTHON_URI}/run-script/${req.params.id}`, {
+      method: 'POST',
+    });
+
+    if (!response.ok) {
+      throw new Error(`Fetch failed with status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('Fetch error:', error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 export default router;
