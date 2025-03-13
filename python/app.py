@@ -79,9 +79,9 @@ def plot_line_graph_save_as_image(heights, game_id):
     plt.ylabel('Height')
     plt.grid(True)
 
-    # time = int(time.time()) 
+    current_millis = int(time.time() * 1000)
     # Save the plot to the "images" folder
-    image_path = f'images/game_{game_id}_graph.png'
+    image_path = f'images/game_{game_id}_graph_{current_millis}.png'
     plt.savefig(image_path)
     plt.close()
 

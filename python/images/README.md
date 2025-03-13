@@ -1,1 +1,0 @@
-The images will be saved here in development
