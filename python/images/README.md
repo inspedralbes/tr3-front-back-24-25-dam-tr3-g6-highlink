@@ -1,0 +1,1 @@
+Aquí es guarden les imatges generades per les stats
