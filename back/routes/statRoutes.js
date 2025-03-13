@@ -5,13 +5,6 @@ import mongoose from 'mongoose';
 dotenv.config();
 
 const router = express.Router();
-console.log(process.env.NODE_MONGODB_URI);
-console.log(process.env.NODE_MONGODB_URI);
-console.log(process.env.NODE_MONGODB_URI);
-console.log(process.env.NODE_MONGODB_URI);
-console.log(process.env.NODE_MONGODB_URI);
-console.log(process.env.NODE_MONGODB_URI);
-console.log(process.env.NODE_MONGODB_URI);
 
 // Connect to MongoDB
 mongoose.connect(process.env.NODE_MONGODB_URI);
