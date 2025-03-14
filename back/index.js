@@ -4,8 +4,10 @@ import { sequelize } from "./models/index.js";
 import userRoutes from "./routes/userRoutes.js";
 import gameRoutes from "./routes/gameRoutes.js";
 import configRoutes from "./routes/configRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js"; // Importar las nuevas rutas
 import dotenv from "dotenv";
 import { spawn } from 'node:child_process';
+import cors from "cors";
 
 dotenv.config();
 
@@ -15,10 +17,12 @@ const app = express();
 const PORT = process.env.NODE_PORT || 4000;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use("/api/users", userRoutes);
 app.use("/api/games", gameRoutes);
 app.use("/api/config", configRoutes);
+app.use("/api/messages", messageRoutes); // Usar las nuevas rutas
 
 // app.use("/uploads", express.static("uploads"));
 
