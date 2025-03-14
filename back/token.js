@@ -3,23 +3,16 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const SECRET_KEY = process.env.SECRET_KEY_TOKEN;
+const SECRET_KEY = process.env.NODE_SECRET_KEY_TOKEN;
 
 export function generateToken(email) {
     const payload = { email };
     const secret = SECRET_KEY; // Replace with your actual secret key
     const options = { expiresIn: '1h' }; // Token expiration time
-
     const token = jwt.sign(payload, secret, options);
     return token;
 }
 
-// export function verifyToken(req, res) {
-//     const secret = process.env.SECRET_KEY_TOKEN
-//     const token = req.headers.authorization?.split(' ')[1];
-//     const decoded = jwt.verify(token, secret);
-//     return decoded;
-// }
 export function verifyToken(token) {
     console.log('Header Auth: ', token);
     const extractedToken = token?.split(' ')[1];

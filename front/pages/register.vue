@@ -1,9 +1,9 @@
 <template>
-    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-800 to-slate-900">
+    <div class="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full animate-fade-in">
             <!-- Page Title -->
             <div class="text-center">
-                <h2 class="text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                <h2 class="text-5xl sm:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
                     Register
                 </h2>
                 <p class="text-lg text-gray-300 mb-8">
@@ -76,12 +76,6 @@
                         </button>
                     </div>
                 </form>
-                <!-- Login Link -->
-                <div class="text-center mt-4">
-                    <router-link to="/login" class="text-blue-400 hover:text-blue-300 text-sm">
-                        Already have an account? Login here.
-                    </router-link>
-                </div>
             </div>
         </div>
     </div>

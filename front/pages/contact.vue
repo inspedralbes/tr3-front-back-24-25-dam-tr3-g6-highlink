@@ -1,9 +1,9 @@
 <template>
-    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl w-full animate-fade-in">
             <!-- Page Title -->
             <div class="text-center">
-                <h1 class="text-4xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                <h1 class="text-5xl sm:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
                     Contact Us
                 </h1>
                 <p class="text-lg text-gray-300 mb-8">
@@ -83,6 +83,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { sendMessage } from '../services/communicationManager.js';
 
 // Form data
 const form = ref({
@@ -93,10 +94,14 @@ const form = ref({
 });
 
 // Form submission handler
-const submitForm = () => {
-    console.log('Form submitted:', form.value);
-    alert('Thank you for contacting us! We will get back to you soon.');
-    form.value = { name: '', email: '', subject: '', message: '' }; // Reset form
+const submitForm = async () => {
+    try {
+        await sendMessage(form.value.name, form.value.email, form.value.subject, form.value.message);
+        alert('Thank you for contacting us! We will get back to you soon.');
+        form.value = { name: '', email: '', subject: '', message: '' }; // Reset form
+    } catch (error) {
+        alert('Failed to send message. Please try again.');
+    }
 };
 </script>
 

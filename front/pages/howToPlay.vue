@@ -1,6 +1,6 @@
 <template>
     <div class="text-center animate-fade-in">
-        <h1 class="text-4xl sm:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+        <h1 class="text-5xl sm:text-6xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
             How to Play
         </h1>
         <p class="text-lg sm:text-xl text-gray-300 mb-12 max-w-2xl mx-auto">

@@ -1,9 +1,9 @@
 <template>
-    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
         <div class="max-w-6xl w-full animate-fade-in">
             <!-- Page Title -->
             <div class="text-center">
-                <h1 class="text-4xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                <h1 class="text-5xl sm:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
                     Art Gallery
                 </h1>
                 <p class="text-lg text-gray-300">Discover the amazing art of our game</p>
