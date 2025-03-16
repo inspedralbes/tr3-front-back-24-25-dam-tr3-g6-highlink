@@ -12,11 +12,16 @@
         <aside
             :class="['w-64 bg-slate-900/80 backdrop-blur-sm fixed h-screen p-4 shadow-lg transform transition-transform duration-300 z-40 lg:hidden', isSidebarOpen ? 'translate-x-0' : '-translate-x-full']">
             <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-                    Admin Panel
+                <h2
+                    class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                    High Link
                 </h2>
             </div>
             <nav class="space-y-2">
+                <router-link to="/"
+                    class="flex items-center p-2 text-gray-300 hover:bg-slate-800/50 rounded-lg transition-colors duration-300">
+                    <span>Home</span>
+                </router-link>
                 <router-link to="/howToPlay"
                     class="flex items-center p-2 text-gray-300 hover:bg-slate-800/50 rounded-lg transition-colors duration-300">
                     <span>How To Play</span>
@@ -36,17 +41,38 @@
             </nav>
         </aside>
 
-        <!-- Navbar -->
-        <nav class="bg-slate-900/80 backdrop-blur-sm py-4 fixed w-full z-30 shadow-lg">
+        <!-- Navbar (Visible only on desktop) -->
+        <nav class="lg:block hidden bg-slate-800/80 backdrop-blur-sm py-4 fixed w-full z-30 shadow-lg">
+            <div class="container mx-auto flex justify-between items-center px-4">
+                <!-- Brand Name -->
+                <router-link to="/"
+                    class="text-white text-2xl font-bold hover:text-gray-300 transition-colors duration-300">
+                    High Link
+                </router-link>
+
+                <!-- Navigation Links -->
+                <div class="flex space-x-6">
+                    <router-link to="/howToPlay" class="text-white hover:text-gray-300 transition-colors duration-300">
+                        How To Play
+                    </router-link>
+                    <router-link to="/aboutUs" class="text-white hover:text-gray-300 transition-colors duration-300">
+                        About Us
+                    </router-link>
+                    <router-link to="/contact" class="text-white hover:text-gray-300 transition-colors duration-300">
+                        Contact
+                    </router-link>
+                    <router-link to="/gallery" class="text-white hover:text-gray-300 transition-colors duration-300">
+                        Gallery
+                    </router-link>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Navbar (Visible only on mobile) -->
+        <nav class="lg:hidden bg-slate-800/80 backdrop-blur-sm py-4 fixed w-full z-30 shadow-lg">
             <div class="container mx-auto flex justify-between items-center px-4">
                 <!-- Hamburger Menu and Title -->
-                <div class="flex items-center">
-                    <button @click="toggleSidebar" class="lg:hidden mr-4 p-2 bg-slate-900/80 rounded-lg shadow-lg">
-                        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
-                    </button>
+                <div class="flex items-center ml-12 p-2">
                     <h1 class="text-xl font-bold text-gray-300">
                         {{ currentPageTitle }}
                     </h1>
@@ -55,8 +81,10 @@
         </nav>
 
         <!-- Main Content -->
-        <main class="flex-1 pt-20 pb-16">
-            <NuxtPage />
+        <main class="flex-1 w-full p-4 mt-16 lg:mt-0 overflow-y-auto">
+            <div class="container mx-auto max-w-4xl">
+                <NuxtPage />
+            </div>
         </main>
     </div>
 </template>
@@ -85,7 +113,7 @@ const currentPageTitle = computed(() => {
         case '/gallery':
             return 'Gallery';
         default:
-            return 'Home';
+            return 'High Link';
     }
 });
 </script>
@@ -101,6 +129,7 @@ const currentPageTitle = computed(() => {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -110,11 +139,5 @@ const currentPageTitle = computed(() => {
 /* Smooth transitions for sidebar links */
 aside a {
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Highlight active route in the sidebar */
-.router-link-active {
-    background-color: rgba(59, 130, 246, 0.5); /* Blue background for active link */
-    color: white;
 }
 </style>
