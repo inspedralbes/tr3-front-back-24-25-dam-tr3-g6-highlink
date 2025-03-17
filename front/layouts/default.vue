@@ -80,12 +80,9 @@
             </div>
         </nav>
 
-        <!-- flex-1 w-full p-4 mt-16 lg:mt-0 overflow-y-auto -->
-        <!-- container mx-auto max-w-4xl -->
-
         <!-- Main Content -->
         <main class="flex-1 w-full flex items-center justify-center">
-            <div class="container mx-auto max-w-4xl p-4">
+            <div class="container mx-auto max-w-4xl">
                 <NuxtPage />
             </div>
         </main>

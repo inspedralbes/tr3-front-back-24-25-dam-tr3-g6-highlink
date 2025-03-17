@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-import ConnectedLinesBackground from "~/components/ConnectedLinesBackground.vue";
+import ConnectedLinesBackground from "~/components/connectedLinesBackground.vue";
 import AdminLayout from '~/layouts/admin.vue';
 import DefaultLayout from '~/layouts/default.vue';
 import { useRoute } from 'vue-router';

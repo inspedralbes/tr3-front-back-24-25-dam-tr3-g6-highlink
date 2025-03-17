@@ -2,11 +2,11 @@ import { useRouter } from 'vue-router';
 import { useAppStore } from '../stores/index.js';
 
 const BACKEND_URL = 'http://localhost:4000';
-const appStore = useAppStore();
 
 const handleResponse = async (response) => {
     if (response.status == 401) {
         const router = useRouter();
+        const appStore = useAppStore();
         appStore.logout(); // Clear the app store
         router.push('/admin'); // Redirect to login page
         throw new Error('Unauthorized');

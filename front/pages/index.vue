@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen flex items-center justify-center text-center">
+    <div class="min-h-screen flex items-center justify-center text-center md:pt-24 md:pb-12">
         <div class="animate-fade-in">
             <h1
                 class="text-5xl sm:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
