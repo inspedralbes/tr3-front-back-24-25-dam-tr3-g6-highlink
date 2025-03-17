@@ -41,9 +41,17 @@ services:
       - NODE_ENV=development
     env_file:
       - .env
+    depends_on:
+      - high-link-mysql
+      - high-link-mongodb
     restart: unless-stopped
     networks:
       - high-link-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "high-link-mysql"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
   
   high-link-python:
     build:

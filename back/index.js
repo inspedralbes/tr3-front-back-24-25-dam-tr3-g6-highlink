@@ -28,12 +28,12 @@ app.use("/api/messages", messageRoutes);
 
 app.use("/start-stats", (req, res) => {
 
-  let messageToSend = "Stats started";
+  let messageToSend = "Stats running";
 
   if (statsService.state === "stopped") {
     console.log("Starting stats");
     startProcess(statsService);
-    statsService.state = "started";
+    statsService.state = "running";
   } else {
     console.log("Stopping stats");
     stopProcess(statsService);
