@@ -64,6 +64,36 @@ app.get("/:id", async (req, res) => {
     }
 });
 
+app.post("/createinfo", async (req, res) => {
+    try {
+        let value = 0;
+        for (let i = 0; i < 100; i++) {
+            const randomNum = Math.floor(Math.random() * 7) - 2;
+            value = Math.max(0, value + randomNum);
+
+            const d100 = Math.floor(Math.random() * 100) + 1;
+            if (d100 == 1) {
+                value = 0;
+            }
+
+            const stat = new Stat({ game_id: 100, height: value });
+            await stat.save();
+        }
+        res.json({ message: "100 stats created" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.delete("/clearinfo", async (req, res) => {
+    try {
+        await Stat.deleteMany({ game_id: 100 });
+        res.json({ message: "All stats with game_id 100 deleted" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.listen(port, () => {
     console.log(`MicroService running on port ${port}`);
 });
