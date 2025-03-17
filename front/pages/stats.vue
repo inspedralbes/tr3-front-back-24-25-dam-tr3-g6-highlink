@@ -1,7 +1,93 @@
 <template>
-    <h1>aa</h1>
+    <div class="animate-fade-in p-4 sm:p-6">
+        <!-- Page Title -->
+        <h1 class="text-4xl sm:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 text-center">
+            Search Game Stats by ID
+        </h1>
+
+        <!-- Search Input -->
+        <div class="max-w-2xl mx-auto mb-8">
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input
+                    type="text"
+                    v-model="gameId"
+                    placeholder="Enter Game ID"
+                    class="w-full px-6 py-3 bg-white/10 backdrop-blur-sm rounded-lg border border-gray-300/20 text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
+                />
+                <button
+                    @click="searchGame"
+                    class="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 whitespace-nowrap"
+                >
+                    Search Stats
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Details -->
+        <div v-if="game" class="bg-white/10 backdrop-blur-sm rounded-lg p-6 sm:p-8 shadow-lg max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Game Image -->
+                <div class="flex justify-center items-center">
+                    <img :src="game.image" :alt="game.name" class="w-full h-auto rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300" />
+                </div>
+
+                <!-- Game Stats Image -->
+                <div class="flex justify-center items-center">
+                    <img :src="game.statsImage" :alt="`${game.name} Stats`" class="w-full h-auto rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div v-if="error" class="mt-8 text-center text-red-500 text-lg">
+            {{ error }}
+        </div>
+    </div>
 </template>
 
 <script setup>
-    // add your script here
+import { ref } from 'vue';
+
+// Reactive state for game ID, game data, and error
+const gameId = ref('');
+const game = ref(null);
+const error = ref('');
+
+// Search for a game by ID
+const searchGame = async () => {
+    if (!gameId.value) {
+        error.value = 'Please enter a game ID.';
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/games/${gameId.value}`);
+        if (!response.ok) throw new Error('Game not found');
+
+        const data = await response.json();
+        game.value = data;
+        error.value = '';
+    } catch (err) {
+        error.value = 'Failed to fetch game details. Please check the ID and try again.';
+        game.value = null;
+    }
+};
 </script>
+
+<style scoped>
+/* Fade-in animation */
+.animate-fade-in {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>

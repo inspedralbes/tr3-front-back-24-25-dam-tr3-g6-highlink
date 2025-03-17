@@ -38,6 +38,10 @@
                     class="flex items-center p-2 text-gray-300 hover:bg-slate-800/50 rounded-lg transition-colors duration-300">
                     <span>Gallery</span>
                 </router-link>
+                <router-link to="/stats"
+                    class="flex items-center p-2 text-gray-300 hover:bg-slate-800/50 rounded-lg transition-colors duration-300">
+                    <span>Stats</span>
+                </router-link>
             </nav>
         </aside>
 
@@ -63,6 +67,9 @@
                     </router-link>
                     <router-link to="/gallery" class="text-white hover:text-gray-300 transition-colors duration-300">
                         Gallery
+                    </router-link>
+                    <router-link to="/stats" class="text-white hover:text-gray-300 transition-colors duration-300">
+                        Stats
                     </router-link>
                 </div>
             </div>
@@ -112,6 +119,8 @@ const currentPageTitle = computed(() => {
             return 'Contact';
         case '/gallery':
             return 'Gallery';
+        case '/stats':
+            return 'Stats';
         default:
             return 'High Link';
     }
