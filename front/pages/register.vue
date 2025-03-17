@@ -106,9 +106,10 @@ const register = async () => {
     }
 
     try {
-        const { user, token } = await apiRegister(registerForm.value.name, registerForm.value.email, registerForm.value.password);
+        const user = await apiRegister(registerForm.value.name, registerForm.value.email, registerForm.value.password);
+        console.log(user);
         appStore.setUser(user);
-        appStore.setToken(token);
+        localStorage.setItem('user', user);
         console.log('Registration successful:', user);
         router.push('/'); // Redirect to home page after successful registration
     } catch (error) {

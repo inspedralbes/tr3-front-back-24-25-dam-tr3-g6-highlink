@@ -69,6 +69,7 @@ export async function sendMessage(name, email, subject, message) {
 }
 
 export async function fetchComments() {
+    const appStore = useAppStore();
     const response = await fetch(`${BACKEND_URL}/api/messages`, {
         method: 'GET',
         headers: {
@@ -81,6 +82,7 @@ export async function fetchComments() {
 }
 
 export async function deleteComment(commentId) {
+    const appStore = useAppStore();
     const response = await fetch(`${BACKEND_URL}/api/messages/${commentId}`, {
         method: 'DELETE',
         headers: {
@@ -94,6 +96,7 @@ export async function deleteComment(commentId) {
 
 // New functions for managing users
 export async function fetchAdminUsers() {
+    const appStore = useAppStore();
     const response = await fetch(`${BACKEND_URL}/api/users`, {
         method: 'GET',
         headers: {
@@ -106,6 +109,7 @@ export async function fetchAdminUsers() {
 }
 
 export async function updateAdminUser(userId, userData) {
+    const appStore = useAppStore();
     const response = await fetch(`${BACKEND_URL}/api/users/${userId}`, {
         method: 'PUT',
         headers: {
@@ -119,6 +123,7 @@ export async function updateAdminUser(userId, userData) {
 }
 
 export async function deleteAdminUser(userId) {
+    const appStore = useAppStore();
     const response = await fetch(`${BACKEND_URL}/api/users/${userId}`, {
         method: 'DELETE',
         headers: {

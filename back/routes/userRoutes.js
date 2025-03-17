@@ -88,6 +88,10 @@ router.put("/:id", async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);
     if (user) {
+      if (req.body.password != user.password) {
+        console.log(req.body.password);
+        req.body.password = await hashPassword(req.body.password);
+      }
       await user.update(req.body);
       res.json(user);
     } else res.status(404).json({ error: "User not found" });
