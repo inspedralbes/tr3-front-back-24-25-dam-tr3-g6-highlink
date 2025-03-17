@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-center">
+    <div class="min-h-screen flex items-center justify-center">
         <div class="max-w-2xl w-full animate-fade-in">
             <!-- Page Title -->
             <div class="text-center">

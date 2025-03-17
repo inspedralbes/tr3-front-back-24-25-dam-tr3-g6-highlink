@@ -1,4 +1,24 @@
+import { useRouter } from 'vue-router';
+import { useAppStore } from '../stores/index.js';
+
 const BACKEND_URL = 'http://localhost:4000';
+const appStore = useAppStore();
+
+const handleResponse = async (response) => {
+    if (response.status == 401) {
+        const router = useRouter();
+        appStore.logout(); // Clear the app store
+        router.push('/admin'); // Redirect to login page
+        throw new Error('Unauthorized');
+    }
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'An error occurred');
+    }
+
+    return response.json();
+};
 
 export async function login(email, password) {
     const response = await fetch(`${BACKEND_URL}/api/users/login`, {
@@ -48,6 +68,64 @@ export async function sendMessage(name, email, subject, message) {
     return response.json();
 }
 
-export async function logout() {
-    // Implement logout logic
+export async function fetchComments() {
+    const response = await fetch(`${BACKEND_URL}/api/messages`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${appStore.getToken()}`,
+        },
+    });
+
+    return handleResponse(response);
+}
+
+export async function deleteComment(commentId) {
+    const response = await fetch(`${BACKEND_URL}/api/messages/${commentId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',            
+            'Authorization': `Bearer ${appStore.getToken()}`,
+        },
+    });
+
+    return handleResponse(response);
+}
+
+// New functions for managing users
+export async function fetchAdminUsers() {
+    const response = await fetch(`${BACKEND_URL}/api/users`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${appStore.getToken()}`,
+        },
+    });
+
+    return handleResponse(response);
+}
+
+export async function updateAdminUser(userId, userData) {
+    const response = await fetch(`${BACKEND_URL}/api/users/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${appStore.getToken()}`,
+        },
+        body: JSON.stringify(userData),
+    });
+
+    return handleResponse(response);
+}
+
+export async function deleteAdminUser(userId) {
+    const response = await fetch(`${BACKEND_URL}/api/users/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${appStore.getToken()}`,
+        },
+    });
+
+    return handleResponse(response);
 }

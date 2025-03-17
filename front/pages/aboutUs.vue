@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-center">
+    <div class="min-h-screen flex items-center justify-center">
         <div class="max-w-4xl w-full animate-fade-in">
             <!-- Page Title -->
             <h1 class="text-5xl sm:text-6xl font-bold text-center tracking-widest mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
