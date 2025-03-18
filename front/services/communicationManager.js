@@ -146,3 +146,16 @@ export async function checkStatsService() {
 
     appStore.setStats(await response.text());
 }
+
+export async function onOffStatsService() {
+    const appStore = useAppStore();
+    const response = await fetch(`${BACKEND_URL}/on-off-stats`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${appStore.getToken()}`,
+        },
+    });
+
+    appStore.setStats(await response.text());
+}

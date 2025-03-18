@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white p-6 sm:p-8">
+    <div class="animate-fade-in">
         <!-- Page Title -->
         <h1 class="text-4xl sm:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 text-center">
             Admin Dashboard
@@ -15,15 +15,15 @@
                 <button
                     @click="toggleStatsService"
                     :class="{
-                        'bg-gradient-to-r from-green-500 to-teal-500': statsServiceActive,
-                        'bg-gradient-to-r from-red-500 to-pink-500': !statsServiceActive,
+                        'bg-gradient-to-r from-green-500 to-teal-500': statsService == 'running',
+                        'bg-gradient-to-r from-red-500 to-pink-500': statsService == 'stopped'
                     }"
                     class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors duration-300 focus:outline-none"
                 >
                     <span
                         :class="{
-                            'translate-x-6': statsServiceActive,
-                            'translate-x-1': !statsServiceActive,
+                            'translate-x-6': statsService == 'running',
+                            'translate-x-1': statsService == 'stopped',
                         }"
                         class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300"
                     ></span>
@@ -46,37 +46,60 @@
 
             <!-- Feature Card 2 -->
             <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
-                <h3 class="text-xl font-bold text-gray-300 mb-4">Game Analytics</h3>
-                <p class="text-gray-400">View detailed game statistics and reports.</p>
+                <h3 class="text-xl font-bold text-gray-300 mb-4">Game Configuration</h3>
+                <p class="text-gray-400">View detailed game configurations and change.</p>
             </div>
 
             <!-- Feature Card 3 -->
             <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
-                <h3 class="text-xl font-bold text-gray-300 mb-4">System Logs</h3>
-                <p class="text-gray-400">Monitor system logs and activity.</p>
+                <h3 class="text-xl font-bold text-gray-300 mb-4">Feedback with users</h3>
+                <p class="text-gray-400">Review user comments.</p>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useAppStore } from '~/stores/index';
+import { checkStatsService, onOffStatsService } from '~/services/communicationManager';
 
-// Reactive state for stats service
-const statsServiceActive = ref(false);
+const appStore = useAppStore();
+var statsService = appStore.statsService;
 
 // Toggle stats service
 const toggleStatsService = () => {
-    statsServiceActive.value = !statsServiceActive.value;
-    // Here you can add logic to start/stop the stats service via an API call
-    if (statsServiceActive.value) {
+    onOffStatsService();
+    statsService = appStore.getStats();
+    
+    console.log('Stats service toggled.');
+    console.log('Stats service:', statsService);
+    if (statsService == 'running') {
         console.log('Stats service started.');
     } else {
         console.log('Stats service stopped.');
     }
 };
+
+onMounted(() => {
+    checkStatsService();
+});
 </script>
 
 <style scoped>
-/* Custom styles (if needed) */
+/* Fade-in animation */
+.animate-fade-in {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 </style>

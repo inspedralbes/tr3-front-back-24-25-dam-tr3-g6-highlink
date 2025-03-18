@@ -10,14 +10,12 @@ export const useAppStore = defineStore('app', {
     actions: {
         setUser(user) {
             this.user = user;
-            localStorage.setItem('user', JSON.stringify(user));
         },
         getUser() {
             return this.user;
         },
         setToken(token) {
             this.token = token;
-            localStorage.setItem('token', token);
         },
         getToken() {
             return this.token;

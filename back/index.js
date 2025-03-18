@@ -8,6 +8,7 @@ import messageRoutes from "./routes/messageRoutes.js";
 import dotenv from "dotenv";
 import { spawn } from 'node:child_process';
 import cors from "cors";
+import { verifyTokenMiddleware } from "./token.js";
 
 dotenv.config();
 
@@ -26,7 +27,7 @@ app.use("/api/messages", messageRoutes);
 
 // app.use("/uploads", express.static("uploads"));
 
-app.use("/on-off-stats", (req, res) => {
+app.use("/on-off-stats", verifyTokenMiddleware, (req, res) => {
 
   let messageToSend = "Stats running";
 
@@ -34,14 +35,16 @@ app.use("/on-off-stats", (req, res) => {
     console.log("Starting stats");
     startProcess(statsService);
     statsService.state = "running";
+    console.log("Stats started");
   } else {
     console.log("Stopping stats");
     stopProcess(statsService);
     statsService.state = "stopped";
+    console.log("Stats stopped");
     messageToSend = "Stats stopped";
   }
   
-  res.send(messageToSend);
+  res.send(statsService.state);
 });
 
 app.use("/state-stats", (req, res) => {

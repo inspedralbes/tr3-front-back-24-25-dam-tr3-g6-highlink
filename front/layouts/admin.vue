@@ -71,7 +71,7 @@
                     <router-link to="/admin/config-users"
                         class="flex items-center p-2 text-gray-300 hover:bg-slate-800/50 rounded-lg transition-colors duration-300">
                         <span>Config Users</span>
-                    </router-link>                    
+                    </router-link>
                     <router-link to="/admin/feedback"
                         class="flex items-center p-2 text-gray-300 hover:bg-slate-800/50 rounded-lg transition-colors duration-300">
                         <span>Comments</span>
@@ -101,8 +101,6 @@
                                 {{ currentPageTitle }}
                             </h1>
                         </div>
-                        <!-- Logout Button -->
-
                     </div>
                 </nav>
 
@@ -163,9 +161,10 @@ const login = async () => {
 
 // Logout function
 const logout = () => {
-    appStore.logout(); // Clear user data
-    console.log('Logged out');
-    router.push('/'); // Redirect to the home page
+    if (appStore.logout()) {
+        console.log('Logged out');
+        router.push('/'); // Redirect to the home page
+    }
 };
 
 // Toggle sidebar on mobile
@@ -189,7 +188,7 @@ const currentPageTitle = computed(() => {
 
 onMounted(() => {
     const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
+    const user = JSON.parse(localStorage.getItem('user'));
 
     if (token && user) {
         appStore.setToken(token);
