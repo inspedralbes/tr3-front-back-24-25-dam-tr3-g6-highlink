@@ -134,3 +134,15 @@ export async function deleteAdminUser(userId) {
 
     return handleResponse(response);
 }
+
+export async function checkStatsService() {
+    const appStore = useAppStore();
+    const response = await fetch(`${BACKEND_URL}/state-stats`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+
+    appStore.setStats(await response.text());
+}

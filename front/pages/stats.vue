@@ -1,5 +1,5 @@
 <template>
-    <div class="animate-fade-in p-4 sm:p-6">
+    <div v-if="statsService" class="animate-fade-in p-4 sm:p-6">
         <!-- Page Title -->
         <h1 class="text-4xl sm:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 text-center">
             Search Game Stats by ID
@@ -43,10 +43,23 @@
             {{ error }}
         </div>
     </div>
+    <div v-else class="flex flex-col items-center justify-center h-full p-4 sm:p-6">
+        <h1 class="text-4xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-yellow-400 text-center">
+            Service Unavailable
+        </h1>
+        <p class="text-lg text-gray-300 text-center">
+            The service is currently under reconstruction. Please check back later.
+        </p>
+    </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useAppStore } from '~/stores/index';
+import { checkStatsService } from '~/services/communicationManager';
+
+const appStore = useAppStore();
+const statsService = ref(appStore.statsService);
 
 // Reactive state for game ID, game data, and error
 const gameId = ref('');
@@ -72,6 +85,10 @@ const searchGame = async () => {
         game.value = null;
     }
 };
+
+onMounted(() => {
+    checkStatsService();
+});
 </script>
 
 <style scoped>

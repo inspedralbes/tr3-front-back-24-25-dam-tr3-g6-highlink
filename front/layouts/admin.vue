@@ -56,16 +56,14 @@
             <aside
                 :class="['w-64 bg-slate-900/80 backdrop-blur-sm fixed h-screen p-4 shadow-lg transform transition-transform duration-300 z-40', isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0']">
                 <div class="text-center mb-8">
-                    <h2
-                        class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-                        Admin Panel
-                    </h2>
+                    <router-link to="/admin">
+                        <h2
+                            class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                            Admin Panel
+                        </h2>
+                    </router-link>
                 </div>
                 <nav class="space-y-2">
-                    <router-link to="/admin/feedback"
-                        class="flex items-center p-2 text-gray-300 hover:bg-slate-800/50 rounded-lg transition-colors duration-300">
-                        <span>Comments</span>
-                    </router-link>
                     <router-link to="/admin/config-game"
                         class="flex items-center p-2 text-gray-300 hover:bg-slate-800/50 rounded-lg transition-colors duration-300">
                         <span>Config Game</span>
@@ -73,14 +71,18 @@
                     <router-link to="/admin/config-users"
                         class="flex items-center p-2 text-gray-300 hover:bg-slate-800/50 rounded-lg transition-colors duration-300">
                         <span>Config Users</span>
+                    </router-link>                    
+                    <router-link to="/admin/feedback"
+                        class="flex items-center p-2 text-gray-300 hover:bg-slate-800/50 rounded-lg transition-colors duration-300">
+                        <span>Comments</span>
                     </router-link>
                 </nav>
                 <div class="flex flex-inline">
                     <div @click="logout"
                         class="text-gray-200 hover:text-red-400 font-bold p-2 transition-colors duration-300 flex flex-inline">
                         <span class="mr-2">Logout</span>
-                        <svg class="w-6 h-6" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M18 18V6h-5v12h5Zm0 0h2M4 18h2.5m3.5-5.5V12M6 6l7-2v16l-7-2V6Z" />
                         </svg>

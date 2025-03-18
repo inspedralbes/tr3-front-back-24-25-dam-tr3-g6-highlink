@@ -26,7 +26,7 @@ app.use("/api/messages", messageRoutes);
 
 // app.use("/uploads", express.static("uploads"));
 
-app.use("/start-stats", (req, res) => {
+app.use("/on-off-stats", (req, res) => {
 
   let messageToSend = "Stats running";
 
@@ -42,6 +42,10 @@ app.use("/start-stats", (req, res) => {
   }
   
   res.send(messageToSend);
+});
+
+app.use("/state-stats", (req, res) => {
+  res.send(statsService.state);
 });
 
 function startProcess(service) {
