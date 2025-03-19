@@ -28,7 +28,7 @@
             <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
                 <!-- Game Stats Image -->
                 <div class="flex justify-center items-center">
-                    <img :src="game.statsImage" :alt="`${game.name} Stats`" class="w-full h-auto rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300" />
+                    <img :src="`${statsUrl}/${game.statsImage}`" :alt="`${game.name} Stats`" class="w-full h-auto rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300" />
                 </div>
             </div>
         </div>
@@ -56,8 +56,9 @@ import { checkStatsService, fetchStats } from '~/services/communicationManager';
 
 const appStore = useAppStore();
 var statsService = ref(appStore.getStats());
-
 var statsServiceActive = ref(statsService.value == 'running');
+
+var statsUrl = import.meta.env.VITE_IMAGE_STATS_URL;
 
 // Watch for changes in statsService and update statsServiceActive
 watch(statsService, (newVal) => {
@@ -76,7 +77,6 @@ const searchGame = async () => {
     if (response.status === 'success') {
         game.value = {
             id: response.case_id,
-            image: response.image_path,
             statsImage: response.image_path,
             name: `Game ${response.case_id}`
         };
