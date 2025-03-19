@@ -1,7 +1,8 @@
 import { useRouter } from 'vue-router';
 import { useAppStore } from '../stores/index.js';
 
-const BACKEND_URL = 'http://localhost:4000';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const STATS_URL = import.meta.env.VITE_STATS_URL;
 
 const handleResponse = async (response) => {
     if (response.status == 401) {
@@ -145,7 +146,6 @@ export async function checkStatsService() {
     });
 
     appStore.setStats(await response.text());
-    console.log(appStore.getStats());
 }
 
 export async function onOffStatsService() {
@@ -159,5 +159,24 @@ export async function onOffStatsService() {
     });
 
     appStore.setStats(await response.text());
-    console.log(appStore.getStats());
+    
+    if (!response.ok) {
+        return handleResponse(response);
+    }
+}
+
+export async function fetchStats(id) {
+    console.log(`${STATS_URL}/${id}`);
+    const response = await fetch(`${STATS_URL}/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch stats');
+    }
+
+    return response.json();
 }

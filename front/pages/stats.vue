@@ -25,12 +25,7 @@
 
         <!-- Game Details -->
         <div v-if="game" class="bg-white/10 backdrop-blur-sm rounded-lg p-6 sm:p-8 shadow-lg max-w-4xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Game Image -->
-                <div class="flex justify-center items-center">
-                    <img :src="game.image" :alt="game.name" class="w-full h-auto rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300" />
-                </div>
-
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
                 <!-- Game Stats Image -->
                 <div class="flex justify-center items-center">
                     <img :src="game.statsImage" :alt="`${game.name} Stats`" class="w-full h-auto rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300" />
@@ -43,6 +38,7 @@
             {{ error }}
         </div>
     </div>
+
     <div v-else class="flex flex-col items-center justify-center h-full p-4 sm:p-6">
         <h1 class="text-4xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-yellow-400 text-center">
             Service Unavailable
@@ -56,7 +52,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useAppStore } from '~/stores/index';
-import { checkStatsService } from '~/services/communicationManager';
+import { checkStatsService, fetchStats } from '~/services/communicationManager';
 
 const appStore = useAppStore();
 var statsService = ref(appStore.getStats());
@@ -75,21 +71,19 @@ const error = ref('');
 
 // Search for a game by ID
 const searchGame = async () => {
-    if (!gameId.value) {
-        error.value = 'Please enter a game ID.';
-        return;
-    }
+    const response = await fetchStats(gameId.value);
 
-    try {
-        const response = await fetch(`/api/games/${gameId.value}`);
-        if (!response.ok) throw new Error('Game not found');
-
-        const data = await response.json();
-        game.value = data;
+    if (response.status === 'success') {
+        game.value = {
+            id: response.case_id,
+            image: response.image_path,
+            statsImage: response.image_path,
+            name: `Game ${response.case_id}`
+        };
         error.value = '';
-    } catch (err) {
-        error.value = 'Failed to fetch game details. Please check the ID and try again.';
+    } else {
         game.value = null;
+        error.value = 'Failed to fetch game stats. Please try again.';
     }
 };
 

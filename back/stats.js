@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -9,8 +10,7 @@ const port = process.env.NODE_STATS_PORT || 4001;
 
 // Middleware
 app.use(express.json());
-
-dotenv.config();
+app.use(cors());
 
 // Connect to MongoDB
 mongoose.connect(process.env.NODE_MONGODB_URI);
