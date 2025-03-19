@@ -145,6 +145,7 @@ export async function checkStatsService() {
     });
 
     appStore.setStats(await response.text());
+    console.log(appStore.getStats());
 }
 
 export async function onOffStatsService() {
@@ -158,4 +159,5 @@ export async function onOffStatsService() {
     });
 
     appStore.setStats(await response.text());
+    console.log(appStore.getStats());
 }

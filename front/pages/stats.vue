@@ -1,5 +1,5 @@
 <template>
-    <div v-if="statsService" class="animate-fade-in p-4 sm:p-6">
+    <div v-if="statsServiceActive" class="animate-fade-in p-4 sm:p-6">
         <!-- Page Title -->
         <h1 class="text-4xl sm:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 text-center">
             Search Game Stats by ID
@@ -54,12 +54,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useAppStore } from '~/stores/index';
 import { checkStatsService } from '~/services/communicationManager';
 
 const appStore = useAppStore();
-const statsService = ref(appStore.statsService);
+var statsService = ref(appStore.getStats());
+
+var statsServiceActive = ref(statsService.value == 'running');
+
+// Watch for changes in statsService and update statsServiceActive
+watch(statsService, (newVal) => {
+    statsServiceActive.value = newVal == 'running';
+});
 
 // Reactive state for game ID, game data, and error
 const gameId = ref('');
@@ -86,8 +93,10 @@ const searchGame = async () => {
     }
 };
 
-onMounted(() => {
-    checkStatsService();
+onMounted(async () => {
+    await checkStatsService();
+
+    statsService.value = appStore.getStats();
 });
 </script>
 

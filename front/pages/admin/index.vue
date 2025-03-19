@@ -15,15 +15,15 @@
                 <button
                     @click="toggleStatsService"
                     :class="{
-                        'bg-gradient-to-r from-green-500 to-teal-500': statsService == 'running',
-                        'bg-gradient-to-r from-red-500 to-pink-500': statsService == 'stopped'
+                        'bg-gradient-to-r from-green-500 to-teal-500': statsServiceActive,
+                        'bg-gradient-to-r from-red-500 to-pink-500': statsServiceActive == false,
                     }"
                     class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors duration-300 focus:outline-none"
                 >
                     <span
                         :class="{
-                            'translate-x-6': statsService == 'running',
-                            'translate-x-1': statsService == 'stopped',
+                            'translate-x-6': statsServiceActive,
+                            'translate-x-1': statsServiceActive == false,
                         }"
                         class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300"
                     ></span>
@@ -65,24 +65,30 @@ import { useAppStore } from '~/stores/index';
 import { checkStatsService, onOffStatsService } from '~/services/communicationManager';
 
 const appStore = useAppStore();
-var statsService = appStore.statsService;
+var statsService = ref(appStore.getStats());
+
+var statsServiceActive = ref(statsService.value == 'running');
+
+// Watch for changes in statsService and update statsServiceActive
+watch(statsService, (newVal) => {
+    statsServiceActive.value = newVal == 'running';
+});
 
 // Toggle stats service
-const toggleStatsService = () => {
-    onOffStatsService();
-    statsService = appStore.getStats();
-    
-    console.log('Stats service toggled.');
-    console.log('Stats service:', statsService);
-    if (statsService == 'running') {
+const toggleStatsService = async () => {
+    await onOffStatsService();
+    statsService.value = appStore.getStats();
+    if (statsService.value == 'running') {
         console.log('Stats service started.');
     } else {
         console.log('Stats service stopped.');
     }
 };
 
-onMounted(() => {
-    checkStatsService();
+onMounted ( async () => {
+    await checkStatsService();
+
+    statsService.value = appStore.getStats();
 });
 </script>
 
