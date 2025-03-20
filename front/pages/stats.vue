@@ -1,5 +1,5 @@
 <template>
-    <div v-if="statsServiceActive" class="animate-fade-in p-4 sm:p-6">
+    <div v-if="statsServiceActive" class="animate-fade-in p-4 sm:p-6 md:pt-24 md:pb-12">
         <!-- Page Title -->
         <h1 class="text-4xl sm:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 text-center">
             Search Game Stats by ID
@@ -58,7 +58,7 @@ const appStore = useAppStore();
 var statsService = ref(appStore.getStats());
 var statsServiceActive = ref(statsService.value == 'running');
 
-var statsUrl = import.meta.env.VITE_IMAGE_STATS_URL;
+var statsUrl = import.meta.env.VITE_STATS_URL;
 
 // Watch for changes in statsService and update statsServiceActive
 watch(statsService, (newVal) => {

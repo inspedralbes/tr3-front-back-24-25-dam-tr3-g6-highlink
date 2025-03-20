@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import path from 'path';
 
 dotenv.config();
 
@@ -23,6 +24,9 @@ const statSchema = new mongoose.Schema({
 
 // Create a Mongoose model
 const Stat = mongoose.model('Stat', statSchema);
+
+// Serve images for the frontend
+app.use('/images', express.static(path.join('/app/images')));
 
 // Create Stat
 app.post("/", async (req, res) => {
