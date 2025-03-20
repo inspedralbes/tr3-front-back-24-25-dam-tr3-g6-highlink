@@ -1,5 +1,19 @@
 {
-  "jumpHeight": 1000.5,
-  "jumpSpeed": 10000.5,
-  "speed": 3000
+  "Config": [
+    {
+      "name": "jumpHeight",
+      "value": 1000.5,
+      "type": "float"
+    },
+    {
+      "name": "jumpSpeed",
+      "value": 10000.5,
+      "type": "float"
+    },
+    {
+      "name": "speed",
+      "value": 4000,
+      "type": "int"
+    }
+  ]
 }

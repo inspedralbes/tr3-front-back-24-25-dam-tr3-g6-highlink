@@ -4,7 +4,6 @@ export const useAppStore = defineStore('app', {
     state: () => ({
         user: {},
         token: "",
-        config: {},
         stats: "stopped"
     }),
     actions: {
@@ -19,12 +18,6 @@ export const useAppStore = defineStore('app', {
         },
         getToken() {
             return this.token;
-        },
-        setConfig(config) {
-            this.config = config;
-        },
-        getConfig() {
-            return this.config;
         },
         setStats(stats) {
             this.stats = stats;

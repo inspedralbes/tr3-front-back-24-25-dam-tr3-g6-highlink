@@ -180,3 +180,30 @@ export async function fetchStats(id) {
 
     return response.json();
 }
+
+export async function fetchConfig() {
+    const appStore = useAppStore();
+    const response = await fetch(`${BACKEND_URL}/api/config`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${appStore.getToken()}`,
+        },
+    });
+
+    return handleResponse(response);
+}
+
+export async function updateConfig(newConfig) {
+    const appStore = useAppStore();
+    const response = await fetch(`${BACKEND_URL}/api/config`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${appStore.getToken()}`,
+        },
+        body: JSON.stringify(newConfig),
+    });
+
+    return handleResponse(response);
+}
