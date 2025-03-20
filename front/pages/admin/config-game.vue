@@ -3,41 +3,78 @@
         <h2 class="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
             Config Game
         </h2>
-        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-            <p class="text-gray-300">Configure game settings here.</p>
-            <div v-for="(config, index) in configs" :key="index" class="mb-4">
-                <label class="block text-gray-300">{{ config.name }}</label>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+            <p class="text-gray-300 mb-6">Configure game settings here.</p>
+
+            <!-- Existing Configs -->
+            <div v-for="(config, index) in configs" :key="index" class="mb-4 p-4 bg-slate-800/50 rounded-lg">
+                <label class="block text-gray-300 text-sm font-medium mb-1">{{ config.name }}</label>
                 <input 
                     v-if="config.type === 'float' || config.type === 'int'" 
                     :type="'number'" 
                     v-model="config.value" 
-                    class="input"
+                    class="w-full px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-gray-300/20 text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input 
                     v-else 
                     :type="'text'" 
                     v-model="config.value" 
-                    class="input"
+                    class="w-full px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-gray-300/20 text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <button @click="removeConfig(index)" class="btn btn-danger">Remove</button>
+                <button 
+                    @click="removeConfig(index)" 
+                    class="mt-2 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300"
+                >
+                    Remove
+                </button>
             </div>
-            <div class="mt-6">
-                <h3 class="text-xl font-bold mb-4">Add New Config</h3>
-                <label class="block text-gray-300">Name</label>
-                <input type="text" v-model="newConfig.name" class="input mb-2" />
-                <label class="block text-gray-300">Value</label>
-                <input 
-                    :type="newConfig.type === 'float' || newConfig.type === 'int' ? 'number' : 'text'" 
-                    v-model="newConfig.value" 
-                    class="input mb-2" 
-                />
-                <label class="block text-gray-300">Type</label>
-                <select v-model="newConfig.type" class="input mb-4">
-                    <option value="float">Float</option>
-                    <option value="int">Int</option>
-                    <option value="text">Text</option>
-                </select>
-                <button @click="addConfig" class="btn" :disabled="!newConfig.name || !newConfig.value">Add Config</button>
+
+            <!-- Add New Config -->
+            <div class="mt-8">
+                <h3 class="text-xl font-bold text-gray-300 mb-4">Add New Config</h3>
+                <div class="space-y-4">
+                    <!-- Name Input -->
+                    <div>
+                        <label class="block text-gray-300 text-sm font-medium mb-1">Name</label>
+                        <input 
+                            type="text" 
+                            v-model="newConfig.name" 
+                            class="w-full px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-gray-300/20 text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+
+                    <!-- Value Input -->
+                    <div>
+                        <label class="block text-gray-300 text-sm font-medium mb-1">Value</label>
+                        <input 
+                            :type="newConfig.type === 'float' || newConfig.type === 'int' ? 'number' : 'text'" 
+                            v-model="newConfig.value" 
+                            class="w-full px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-gray-300/20 text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+
+                    <!-- Type Dropdown -->
+                    <div>
+                        <label class="block text-gray-300 text-sm font-medium mb-1">Type</label>
+                        <select 
+                            v-model="newConfig.type" 
+                            class="w-full px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-gray-300/20 text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="float" class="bg-slate-800">Float</option>
+                            <option value="int" class="bg-slate-800">Int</option>
+                            <option value="text" class="bg-slate-800">Text</option>
+                        </select>
+                    </div>
+
+                    <!-- Add Config Button -->
+                    <button 
+                        @click="addConfig" 
+                        :disabled="!newConfig.name || !newConfig.value" 
+                        class="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        Add Config
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -96,27 +133,5 @@ onMounted(fetchConfigs);
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.input {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
-}
-
-.btn {
-    padding: 0.5rem 1rem;
-    background-color: #4f46e5;
-    color: white;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-}
-
-.btn-danger {
-    background-color: #e53e3e;
-    margin-left: 0.5rem;
 }
 </style>
