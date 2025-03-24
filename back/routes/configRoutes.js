@@ -11,7 +11,7 @@ const __dirname = dirname(__filename);
 const configFilePath = path.join(__dirname, 'config.json');
 
 // GET route to return the config file content
-router.get('/', verifyTokenMiddleware, (req, res) => {
+router.get('/', (req, res) => {
     fs.readFile(configFilePath, 'utf8', (err, data) => {
         if (err) {
             return res.status(500).json({ error: 'Failed to read config file' });

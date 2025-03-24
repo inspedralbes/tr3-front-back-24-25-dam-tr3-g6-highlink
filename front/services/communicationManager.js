@@ -186,12 +186,11 @@ export async function fetchConfig() {
     const response = await fetch(`${BACKEND_URL}/api/config`, {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${appStore.getToken()}`,
+            'Content-Type': 'application/json'
         },
     });
 
-    return handleResponse(response);
+    return response.json();
 }
 
 export async function updateConfig(newConfig) {
