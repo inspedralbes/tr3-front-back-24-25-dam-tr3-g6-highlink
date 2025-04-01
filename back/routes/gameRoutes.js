@@ -27,6 +27,16 @@ router.get("/:id", async (req, res) => {
   else res.status(404).json({ error: "Game not found" });
 });
 
+// Get Games by Player ID
+router.get("/user/:id", async (req, res) => {
+  try {
+    const games = await Game.findAll({ where: { player_1: req.params.id } });
+    res.json(games);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Update Game
 router.put("/:id", async (req, res) => {
   try {
