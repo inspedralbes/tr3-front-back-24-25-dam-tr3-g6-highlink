@@ -26,8 +26,8 @@ app.use("/api/config", configRoutes);
 app.use("/api/messages", messageRoutes);
 
 // app.use("/uploads", express.static("uploads"));
-
-app.use("/on-off-stats", verifyTokenMiddleware, (req, res) => {
+// verifyTokenMiddleware,
+app.get("/on-off-stats",  (req, res) => {
 
   let messageToSend = "Stats running";
 
@@ -47,8 +47,8 @@ app.use("/on-off-stats", verifyTokenMiddleware, (req, res) => {
   res.send(statsService.state);
 });
 
-app.use("/state-stats", (req, res) => {
-  res.send(statsService.state);
+app.get("/state-stats", (req, res) => {
+  res.send({state: statsService.state});
 });
 
 function startProcess(service) {

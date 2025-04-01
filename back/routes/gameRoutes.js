@@ -6,8 +6,9 @@ const router = express.Router();
 // Create Game
 router.post("/", async (req, res) => {
   try {
+    console.log("Creating a game");
     const game = await Game.create(req.body);
-    res.json(game);
+    res.json({ id: game.id });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
