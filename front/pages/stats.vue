@@ -1,5 +1,5 @@
 <template>
-    <div v-if="statsServiceActive" class="animate-fade-in p-4 sm:p-6 md:pt-24 md:pb-12">
+    <div class="animate-fade-in p-4 sm:p-6 md:pt-24 md:pb-12">
         <!-- Page Title -->
         <h1 class="text-4xl sm:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 text-center">
             Search Game Stats by ID
@@ -39,14 +39,14 @@
         </div>
     </div>
 
-    <div v-else class="flex flex-col items-center justify-center h-full p-4 sm:p-6">
+    <!-- <div v-else class="flex flex-col items-center justify-center h-full p-4 sm:p-6">
         <h1 class="text-4xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-yellow-400 text-center">
             Service Unavailable
         </h1>
         <p class="text-lg text-gray-300 text-center">
             The service is currently under reconstruction. Please check back later.
         </p>
-    </div>
+    </div> -->
 </template>
 
 <script setup>
@@ -62,7 +62,9 @@ var statsUrl = import.meta.env.VITE_STATS_URL;
 
 // Watch for changes in statsService and update statsServiceActive
 watch(statsService, (newVal) => {
+    console.log("new value: ", newVal);
     statsServiceActive.value = newVal == 'running';
+    console.log(statsServiceActive.value);
 });
 
 // Reactive state for game ID, game data, and error

@@ -1,18 +1,12 @@
 services:
   
   high-link-front:
-    build:
-      context: ./front
-      dockerfile: prod.Dockerfile
+    image: httpd:latest
+    container_name: my-apache-app
     ports:
-      - "3000:3000"
+    - '3000:80'
     volumes:
-      - ./front:/app
-      - /app/node_modules
-    working_dir: /app
-    env_file:
-      - .env
-    restart: unless-stopped
+    - ./front:/usr/local/apache2/htdocs
     networks:
         - high-link-network
 

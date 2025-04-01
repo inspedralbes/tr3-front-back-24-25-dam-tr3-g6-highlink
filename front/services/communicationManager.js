@@ -151,7 +151,7 @@ export async function checkStatsService() {
 export async function onOffStatsService() {
     const appStore = useAppStore();
     const response = await fetch(`${BACKEND_URL}/on-off-stats`, {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${appStore.getToken()}`,

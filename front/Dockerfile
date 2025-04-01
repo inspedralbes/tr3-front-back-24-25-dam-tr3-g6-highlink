@@ -16,8 +16,6 @@ RUN npm install
 # Copy the entire project files into the container
 COPY . .
 
-RUN npm run build
-
 # Expose the port that Nuxt.js will run on (default Nuxt port is 3000)
 EXPOSE 3000
 
