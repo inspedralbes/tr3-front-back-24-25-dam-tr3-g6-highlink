@@ -6,10 +6,11 @@ WORKDIR /app
 RUN corepack enable
 
 # Copy package.json and your lockfile, here we add pnpm-lock.yaml for illustration
-COPY package.json pnpm-lock.yaml .npmrc ./
+COPY package.json ./
+COPY ./package-lock.json ./
 
 # Install dependencies
-RUN pnpm i
+RUN pnpm i -shamefully-hoist
 
 # Copy the entire project
 COPY . ./
@@ -31,4 +32,4 @@ ENV HOST 0.0.0.0
 
 EXPOSE 3000
 
-CMD ["node", "/app/server/index.mjs"]
+CMD ["node","/app/server/index.mjs"]

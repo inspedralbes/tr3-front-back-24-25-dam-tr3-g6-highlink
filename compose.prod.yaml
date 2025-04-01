@@ -19,7 +19,7 @@ services:
   high-link-back:
     build:
       context: ./back
-      dockerfile: Dockerfile
+      dockerfile: prod.Dockerfile
     ports:
       - "4000:4000"
       - "4001:4001"
@@ -38,11 +38,6 @@ services:
     restart: unless-stopped
     networks:
       - high-link-network
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "high-link-mysql"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
   
   high-link-python:
     build:
@@ -62,11 +57,11 @@ services:
       - high-link-network
 
   high-link-mysql:
-    image: mysql:5.7
+    image: mysql:9.2
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=ARZBn44MtGRHPFt
       - MYSQL_DATABASE=highlink
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password
@@ -77,7 +72,7 @@ services:
       - high-link-network
 
   high-link-adminer:
-    image: adminer
+    image: adminer:4.8.1-standalone
     ports:
       - "8080:8080"
     restart: unless-stopped
@@ -93,7 +88,7 @@ services:
       - high-link-mongo-data:/data/db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_ROOT_PASSWORD=zsrAwQ98em19lm4
     restart: unless-stopped
     networks:
       - high-link-network
@@ -105,7 +100,7 @@ services:
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=root
       - ME_CONFIG_MONGODB_ADMINPASSWORD=root
-      - ME_CONFIG_MONGODB_URL=mongodb://root:root@high-link-mongodb:27017/
+      - ME_CONFIG_MONGODB_URL=mongodb://root:zsrAwQ98em19lm4@high-link-mongodb:27017/
       - ME_CONFIG_BASICAUTH=false
     restart: unless-stopped
     networks:
