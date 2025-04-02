@@ -62,3 +62,5 @@ public/
 
 # Windows system files
 Thumbs.db
+
+static/
