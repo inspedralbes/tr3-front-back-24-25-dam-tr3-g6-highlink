@@ -8,13 +8,42 @@
             <p class="text-lg sm:text-xl text-gray-300 mb-8">
                 Get ready to play an amazing game!
             </p>
-            <button
-                class="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
-                Download Now
-            </button>
+            <!-- @click="downloadGame" -->
+            <a href="https://highlink.dam.inspedralbes.cat/back/game">
+                <button
+                    class="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
+                    Download Now
+                </button>
+            </a>
         </div>
     </div>
 </template>
+
+<!-- <script>
+export default {
+    methods: {
+        async downloadGame() {
+            try {
+                const response = await fetch('https://highlink.dam.inspedralbes.cat/back/game');
+                if (!response.ok) {
+                    throw new Error('Failed to download the game');
+                }
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'game.zip'; // Adjust the filename as needed
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error('Error downloading the game:', error);
+            }
+        }
+    }
+};
+</script> -->
 
 <style scoped>
 .animate-fade-in {

@@ -9,6 +9,12 @@ import dotenv from "dotenv";
 import { spawn } from 'node:child_process';
 import cors from "cors";
 import { verifyTokenMiddleware } from "./token.js";
+import path from "path";
+
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -25,6 +31,15 @@ app.use("/api/games", gameRoutes);
 app.use("/api/config", configRoutes);
 app.use("/api/messages", messageRoutes);
 
+app.get("/game", (req, res) => {
+  const filePath = path.join(__dirname, "static", "HighLink-v0.1.zip");
+  res.download(filePath, "HighLink-v0.1.zip", (err) => {
+    if (err) {
+      console.error("Error sending file:", err);
+      res.status(500).send("Error sending file");
+    }
+  });
+});
 app.get("/on-off-stats",  (req, res) => {
 
   let messageToSend = "Stats running";
