@@ -1,0 +1,14 @@
+{
+  "Config": [
+    {
+      "name": "jumpHeight",
+      "value": 0.8,
+      "type": "float"
+    },
+    {
+      "name": "speed",
+      "value": 12,
+      "type": "float"
+    }
+  ]
+}

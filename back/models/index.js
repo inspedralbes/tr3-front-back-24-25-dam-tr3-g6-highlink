@@ -1,0 +1,11 @@
+import sequelize from "../config/database.js";
+import User from "./User.js";
+import Game from "./Game.js";
+import Message from "./Message.js";
+
+User.hasMany(Game, { foreignKey: "player_1" });
+Game.belongsTo(User, { as: "Player1", foreignKey: "player_1" });
+
+await sequelize.sync();
+
+export { sequelize, User, Game, Message };
