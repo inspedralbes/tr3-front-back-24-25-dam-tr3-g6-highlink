@@ -25,8 +25,6 @@ app.use("/api/games", gameRoutes);
 app.use("/api/config", configRoutes);
 app.use("/api/messages", messageRoutes);
 
-// app.use("/uploads", express.static("uploads"));
-// verifyTokenMiddleware,
 app.get("/on-off-stats",  (req, res) => {
 
   let messageToSend = "Stats running";

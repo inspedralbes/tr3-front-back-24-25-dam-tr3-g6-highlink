@@ -166,7 +166,6 @@ export async function onOffStatsService() {
 }
 
 export async function fetchStats(id) {
-    console.log(`${STATS_URL}/${id}`);
     const response = await fetch(`${STATS_URL}/${id}`, {
         method: 'GET',
         headers: {

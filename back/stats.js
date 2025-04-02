@@ -13,7 +13,6 @@ const port = process.env.NODE_STATS_PORT || 4001;
 app.use(express.json());
 app.use(cors());
 
-console.log("HELOOOO");
 
 // Connect to MongoDB
 mongoose.connect(process.env.NODE_MONGODB_URI);
@@ -32,7 +31,6 @@ app.use('/images', express.static(path.join('/app/images')));
 
 // Create Stat
 app.post("/", async (req, res) => {
-    console.log("Creating a stat");
     console.log(req.query);
     try {
         const { game_id, height } = req.query;

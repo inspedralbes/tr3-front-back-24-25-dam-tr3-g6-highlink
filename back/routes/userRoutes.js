@@ -20,19 +20,6 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
 }
 
-// Multer storage configuration
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, uploadDir); // Save files in "uploads" folder
-    },
-    filename: (req, file, cb) => {
-      const ext = path.extname(file.originalname);
-      cb(null, `user-${Date.now()}${ext}`);
-    },
-  });
-  
-  const upload = multer({ storage });
-
 // Create User
 router.post("/", async (req, res) => {
   try {

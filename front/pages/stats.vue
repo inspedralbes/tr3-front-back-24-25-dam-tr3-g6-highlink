@@ -62,9 +62,7 @@ var statsUrl = import.meta.env.VITE_STATS_URL;
 
 // Watch for changes in statsService and update statsServiceActive
 watch(statsService, (newVal) => {
-    console.log("new value: ", newVal);
     statsServiceActive.value = newVal == 'running';
-    console.log(statsServiceActive.value);
 });
 
 // Reactive state for game ID, game data, and error
