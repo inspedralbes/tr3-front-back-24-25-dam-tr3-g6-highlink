@@ -33,16 +33,21 @@ app.use('/images', express.static(path.join('/app/images')));
 // Create Stat
 app.post("/", async (req, res) => {
     console.log("Creating a stat");
-    console.log(req.body);
+    console.log(req.query);
     try {
-        const { game_id, height } = req.body;
+        const { game_id, height } = req.query;
 
-        const stat = new Stat({ game_id, height });
+        if (!game_id || !height) {
+            return res.status(400).json({ error: "Missing required query parameters: game_id and height" });
+        }
+
+        const parsedGameId = parseInt(game_id, 10);
+        const parsedHeight = parseFloat(height, 10);
+
+        const stat = new Stat({ game_id: parsedGameId, height: parsedHeight });
         await stat.save();
 
         res.json({ message: "Stat created" });
-
-
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: error.message });
